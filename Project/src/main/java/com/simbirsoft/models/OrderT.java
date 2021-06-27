@@ -1,33 +1,42 @@
 package com.simbirsoft.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import javax.persistence.*;
 import java.sql.Time;
 
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class OrderT {
-    private int orderID;
-    private int employeeID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderID;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private UsersT employeeID;
+
     private Time dateGet;
+
     private Time dateArrived;
+
+    public enum Status{
+        DECLINED, WAITING, DELIVERED
+    }
+
+    @Enumerated(value = EnumType.STRING)
     private Status status;
-    private int staffID;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private UsersT staffID;
+
     private int cabinet;
 
-}
-enum Status{
-    DECLINED("Отклонен"),
-    WAITING("На рассмотрении"),
-    DELIVERED("Доставлен");
-    public final String message;
-
-    Status(String message) {
-        this.message = message;
-    }
 }

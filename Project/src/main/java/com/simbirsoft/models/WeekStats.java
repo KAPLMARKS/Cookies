@@ -1,20 +1,36 @@
 package com.simbirsoft.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.sql.Time;
 
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class WeekStats {
-    private int productID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product productID;
+
     private int counter;
+
     private int cabinet;
-    private int employeeID;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private UsersT employeeID;
+
     private Time date;
 }
