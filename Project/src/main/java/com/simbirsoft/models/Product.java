@@ -18,7 +18,7 @@ import javax.persistence.Id;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productID;
+    private Long productID;
 
     private String productName;
     // изначально в таблице указано как type - varchar, делать ли enum?
