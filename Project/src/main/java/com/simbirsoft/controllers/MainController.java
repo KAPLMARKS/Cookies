@@ -1,7 +1,7 @@
 package com.simbirsoft.controllers;
 
 
-import com.simbirsoft.service.ProductSevice;
+import com.simbirsoft.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @Autowired
-    private ProductSevice productSevice;
+    private ProductService productService;
 
     @GetMapping("/")
     public String home(Model model){
-        model.addAttribute("products", productSevice.getAllProducts());
+        model.addAttribute("products", productService.getAllProducts());
 
         return "main";
     }
