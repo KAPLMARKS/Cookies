@@ -18,6 +18,27 @@
             <tr>
                 <td>${product.id}</td>
                 <td>${product.name}</td>
+                <td>
+                <form action="/cart/add" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <button type="submit" name="add" value="${product.id}">В корзину</button>
+                </form>
+                </td>
+            </tr>
+        </#list>
+    </table>
+    <table>
+        <tr>
+            <h3>Cart</h3>
+        </tr>
+        <#list productsInCart as productInCart>
+            <tr>
+                <td>${productInCart.getProductName()}</td>
+<#--                <td>-->
+<#--                    <form action="/cart/add" method="post">-->
+<#--                        <button type="submit" name="add" value="${product.id}">В корзину</button>-->
+<#--                    </form>-->
+<#--                </td>-->
             </tr>
         </#list>
     </table>

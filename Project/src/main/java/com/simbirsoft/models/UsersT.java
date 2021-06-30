@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -40,4 +41,7 @@ public class UsersT implements Serializable {
 
     @Transient
     private String token;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Product> productList;
 }
