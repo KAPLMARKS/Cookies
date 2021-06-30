@@ -1,5 +1,6 @@
 package com.simbirsoft.models;
 
+import com.simbirsoft.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,4 +45,13 @@ public class UsersT implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Product> productList;
+
+
+    public static UsersT castToModel(UserDto userDto){
+        return UsersT.builder()
+                .id(userDto.getId())
+                .name(userDto.getName())
+                .role(userDto.getRole())
+                .build();
+    }
 }

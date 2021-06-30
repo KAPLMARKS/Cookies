@@ -5,6 +5,8 @@ import com.simbirsoft.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsersServiceImpl implements UsersService {
 
@@ -12,8 +14,8 @@ public class UsersServiceImpl implements UsersService {
     private UserRepository userRepository;
 
     @Override
-    public UsersT findByUsername(String username) {
-        return userRepository.findByName(username);
+    public Optional<UsersT> findByUsername(String username) {
+        return userRepository.findUsersTByName(username);
     }
 
     @Override
