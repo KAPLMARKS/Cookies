@@ -1,5 +1,6 @@
 package com.simbirsoft.models;
 
+import com.simbirsoft.dto.OrderDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,4 +40,16 @@ public class OrderT {
 
     private int cabinet;
 
+
+    public static OrderT castToModel(OrderDto orderDto){
+        return OrderT.builder()
+                .orderID(orderDto.getOrderID())
+                .employeeID(orderDto.getEmployeeID())
+                .dateGet(orderDto.getDateGet())
+                .dateArrived(orderDto.getDateArrived())
+                .status(orderDto.getStatus())
+                .staffID(orderDto.getStaffID())
+                .cabinet(orderDto.getCabinet())
+                .build();
+    }
 }

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Builder
 public class OrderDto {
 
-    private Long orderId;
+    private Long orderID;
     private UsersT employeeID;
     private Time dateGet;
     private Time dateArrived;
@@ -29,7 +29,7 @@ public class OrderDto {
 
     public static OrderDto from(OrderT order){
         return OrderDto.builder()
-                .orderId(order.getOrderID())
+                .orderID(order.getOrderID())
                 .employeeID(order.getEmployeeID())
                 .dateGet(order.getDateGet())
                 .dateArrived(order.getDateArrived())

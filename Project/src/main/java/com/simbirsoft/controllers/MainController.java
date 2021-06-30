@@ -4,7 +4,7 @@ package com.simbirsoft.controllers;
 import com.simbirsoft.models.Product;
 import com.simbirsoft.models.UsersT;
 import com.simbirsoft.security.details.UserDetailsImpl;
-import com.simbirsoft.service.ProductSevice;
+import com.simbirsoft.service.ProductService;
 import com.simbirsoft.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
 
     @Autowired
-    private ProductSevice productSevice;
+    private ProductService productService;
 
     @Autowired
     private UsersService usersService;
@@ -28,7 +28,7 @@ public class MainController {
     public String home(@AuthenticationPrincipal UserDetailsImpl userSession, Model model){
         UsersT userFromDB = usersService.findByUsername(userSession.getUsername());
         model.addAttribute("productsInCart", userFromDB.getProductList());
-        model.addAttribute("products", productSevice.getAllProducts());
+        model.addAttribute("products", productService.getAllProducts());
         return "main";
     }
 
