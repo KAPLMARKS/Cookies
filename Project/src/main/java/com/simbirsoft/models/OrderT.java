@@ -5,10 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -25,7 +26,7 @@ public class OrderT {
     @JoinColumn(name = "employee_id")
     private UsersT employeeID;
 
-    private Time dateGet;
+    private LocalDate dateGet;
 
     private Time dateArrived;
 
@@ -42,9 +43,18 @@ public class OrderT {
 
     private String cabinet;
 
-    @OrderColumn(name = "product_order")
+    @OrderColumn
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Product> productList;
+
+    @ManyToOne
+    private UsersT usersT;
+
+    public OrderT(UsersT usersT){
+        this.dateGet = LocalDate.now();
+        this.usersT = usersT;
+        this.productList = new ArrayList<>();
+    }
 
 
     public static OrderT castToModel(OrderDto orderDto){

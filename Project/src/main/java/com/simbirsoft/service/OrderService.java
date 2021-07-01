@@ -6,5 +6,5 @@ import com.simbirsoft.models.UsersT;
 public interface OrderService {
     void save(OrderT order);
 
-    void setProductsToOrder(Long employeeId, Long orderId);
+    void setProductsToOrder(UsersT user, Long orderId);
 }

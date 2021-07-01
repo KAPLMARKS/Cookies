@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class OrderDto {
 
     private Long orderID;
     private UsersT employeeID;
-    private Time dateGet;
+    private LocalDate dateGet;
     private Time dateArrived;
     private OrderT.Status status;
     private UsersT staffID;

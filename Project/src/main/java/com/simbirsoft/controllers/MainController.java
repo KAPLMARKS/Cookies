@@ -72,15 +72,15 @@ public class MainController {
             Model model
     ){
         UsersT user = userSession.getUser();
-//        Optional<UsersT> userFromDB = usersService.findByUsername(user.getName());
-        OrderT order = OrderT.builder()
-                .cabinet(user.getCabinet())
-                .employeeID(user)
-                .productList(user.getProductList())
-                .status(OrderT.Status.WAITING)
-                .build();
 
-        user.getProductList().clear();
+        OrderT order = new OrderT(user);
+        order.getProductList().addAll(usersService.getUserProducts(user.getId()));
+        order.setStatus(OrderT.Status.WAITING);
+        order.setCabinet(user.getCabinet());
+        order.setEmployeeID(user);
+
+        user.setProductList(null);
+        usersService.save(user);
         orderService.save(order);
 
         return "redirect:/main";

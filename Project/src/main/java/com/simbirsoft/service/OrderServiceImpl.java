@@ -27,11 +27,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void setProductsToOrder(Long employeeId, Long orderId){
+    public void setProductsToOrder(UsersT user, Long orderId){
         Optional<OrderT> optionalOrderT = orderRepository.findById(orderId);
         if (optionalOrderT.isPresent()){
             OrderT orderT = optionalOrderT.get();
-            orderT.setProductList(usersService.getUserProducts(employeeId));
+            orderT.setProductList(user.getProductList());
             orderRepository.save(orderT);
         }
     }
