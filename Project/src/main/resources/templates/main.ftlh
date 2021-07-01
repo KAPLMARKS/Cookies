@@ -155,7 +155,7 @@
                                         <h2 class="card-title">${product.name}</h2>
 
 
-                                                    <form action="/cart/add" method="post">
+                                                    <form action="/cart/add" method="post" >
                                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                                         <button class="btn btn-primary" type="submit" name="add" value="${product.id}">В корзину</button>
                                                     </form>
@@ -181,14 +181,14 @@
                 <p class="lead">Корзина</p>
                 <div class="card create-post-bar d-flex flex-column p-3">
                     <#if productsInCart??>
-                    <form action="/order" method="get">
-
                         <#list productsInCart as productInCart>
                             <tr>
                                 <p class="lead"><td>${productInCart.getProductName()}</td></p>
                             </tr>
                         </#list>
-                    <p class="m-auto"><button class="btn btn-primary">Оформить</button></p>
+                    <form action="/order" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                        <p class="m-auto"><button class="btn btn-primary">Оформить</button></p>
                     </form>
                     <#else>
                         <p class="lead" align="center">Empty</p>

@@ -2,9 +2,11 @@ package com.simbirsoft.controllers;
 
 
 import com.simbirsoft.dto.UserDto;
+import com.simbirsoft.models.OrderT;
 import com.simbirsoft.models.Product;
 import com.simbirsoft.models.UsersT;
 import com.simbirsoft.security.details.UserDetailsImpl;
+import com.simbirsoft.service.OrderService;
 import com.simbirsoft.service.ProductService;
 import com.simbirsoft.service.UsersService;
 import org.apache.catalina.User;
@@ -57,6 +59,30 @@ public class MainController {
             usersT.getProductList().add(product);
             usersService.save(usersT);
         }
+        return "redirect:/main";
+    }
+
+    @Autowired
+    private OrderService orderService;
+
+
+    @PostMapping("order")
+    public String postOrder(
+            @AuthenticationPrincipal UserDetailsImpl userSession,
+            Model model
+    ){
+        UsersT user = userSession.getUser();
+//        Optional<UsersT> userFromDB = usersService.findByUsername(user.getName());
+        OrderT order = OrderT.builder()
+                .cabinet(user.getCabinet())
+                .employeeID(user)
+                .productList(user.getProductList())
+                .status(OrderT.Status.WAITING)
+                .build();
+
+        user.getProductList().clear();
+        orderService.save(order);
+
         return "redirect:/main";
     }
 }

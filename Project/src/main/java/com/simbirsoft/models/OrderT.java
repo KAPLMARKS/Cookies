@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.List;
 
 @Data
 @Builder
@@ -38,7 +40,11 @@ public class OrderT {
     @JoinColumn(name = "staff_id")
     private UsersT staffID;
 
-    private int cabinet;
+    private String cabinet;
+
+    @OrderColumn(name = "product_order")
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Product> productList;
 
 
     public static OrderT castToModel(OrderDto orderDto){

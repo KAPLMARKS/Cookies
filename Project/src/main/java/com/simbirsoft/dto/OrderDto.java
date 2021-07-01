@@ -24,7 +24,7 @@ public class OrderDto {
     private Time dateArrived;
     private OrderT.Status status;
     private UsersT staffID;
-    private int cabinet;
+    private String cabinet;
 
 
     public static OrderDto from(OrderT order){
