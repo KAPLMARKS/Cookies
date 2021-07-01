@@ -30,9 +30,6 @@ public class UsersT implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private Long cabinet;
-
     public enum Role{
         ADMIN, EMPLOYEE
     }
@@ -55,7 +52,6 @@ public class UsersT implements Serializable {
                 .id(userDto.getId())
                 .name(userDto.getName())
                 .role(userDto.getRole())
-                .cabinet(userDto.getCabinet())
                 .build();
     }
 }
