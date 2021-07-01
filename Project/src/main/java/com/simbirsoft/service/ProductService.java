@@ -9,4 +9,6 @@ import java.util.Optional;
 
 public interface ProductService {
     List<ProductDto> getAllProducts();
+
+    Optional<Product> getProductById(Long id);
 }
