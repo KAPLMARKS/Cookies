@@ -28,7 +28,11 @@ public class UsersT implements Serializable {
     private String name;
 
     @Column(nullable = false)
-    private String password;
+    private String hashPassword;
+
+    private String email;
+
+    private String cabinet;
 
     public enum Role{
         ADMIN, EMPLOYEE

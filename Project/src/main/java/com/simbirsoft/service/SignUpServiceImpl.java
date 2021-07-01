@@ -21,8 +21,10 @@ public class SignUpServiceImpl implements  SignUpService {
     public void signUp(SignUpDto form) {
         UsersT usersT = UsersT.builder()
                 .name(form.getName())
-                .password(passwordEncoder.encode(form.getPassword()))
+                .email(form.getEmail())
+                .hashPassword(passwordEncoder.encode(form.getPassword()))
                 .role(UsersT.Role.EMPLOYEE)
+                .cabinet(form.getCabinet())
                 .build();
         userRepository.save(usersT);
     }

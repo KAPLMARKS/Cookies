@@ -59,7 +59,7 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
     <div class="d-flex flex-column pb-3">
-        <#--        <img class="img-fluid mx-auto d-block" src="{% static 'logo.png' %}" alt="new cookie logo" width="72" weight=""72>-->
+                <img class="img-fluid mx-auto d-block" src="https://i.ibb.co/j3NT7Gh/png-transparent-chocolate-chip-cookie-bakery-marie-biscuit-icon-biscuit-food-coffee-biscuits-cartoon.png" border="0" alt="new cookie logo" width="72" weight=""72>
     </div>
 
     <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>

@@ -9,6 +9,7 @@ import com.simbirsoft.service.ProductService;
 import com.simbirsoft.service.UsersService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +29,17 @@ public class MainController {
     @Autowired
     private UsersService usersService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/main")
     public String home(@AuthenticationPrincipal UserDetailsImpl userSession, Model model) {
+        model.addAttribute("username", userSession.getUsername());
         Optional<UsersT> userFromDB = usersService.findByUsername(userSession.getUsername());
         if (userFromDB.isPresent()) {
             UsersT usersT = userFromDB.get();
-            model.addAttribute("productsInCart", usersT.getProductList());
+            if (usersT.getProductList().isEmpty())
+                model.addAttribute("productsInCart", null);
+            else
+                model.addAttribute("productsInCart", usersT.getProductList());
             model.addAttribute("products", productService.getAllProducts());
         }
         return "main";

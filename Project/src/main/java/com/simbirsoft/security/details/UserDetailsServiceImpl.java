@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (usersTOptional.isPresent()){
             UsersT usersT = usersTOptional.get();
             usersT.setToken(restService.signInWithHashPassword(
-                    new SignInDto(usersT.getName(), usersT.getPassword())).getToken());
+                    new SignInDto(usersT.getName(), usersT.getHashPassword())).getToken());
 
             return new UserDetailsImpl(usersT);
         }

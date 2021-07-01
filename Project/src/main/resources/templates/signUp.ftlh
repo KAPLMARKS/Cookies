@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<#import "spring.ftl" as spring/>
 <head>
     <meta charset="UTF-8">
     <title>Cookies</title>
@@ -73,24 +74,44 @@
     .h3{
         text-align: center;
     }
+    .error {
+        color: red;
+    }
 </style>
+<h2><a href="?lang=ru">РУ</a> </h2>
+<h2><a href="?lang=en">EN</a> </h2>
 
+<div class="d-flex flex-column pb-3">
+    <img class="img-fluid mx-auto d-block" src="https://i.ibb.co/j3NT7Gh/png-transparent-chocolate-chip-cookie-bakery-marie-biscuit-icon-biscuit-food-coffee-biscuits-cartoon.png" border="0" alt="new Cookie logo" width="72" weight=""72>
+</div>
+
+<h1 class="h3 mb-3 font-weight-normal"><@spring.message 'sign_up_page.registration.title'/></h1>
+
+<@spring.bind "signUpDto"/>
 <form class="form-signin" action="/signUp" method="post" id="form-signUp">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
-    <div class="d-flex flex-column pb-3">
-        <img class="img-fluid mx-auto d-block" src="{% static 'logo.png' %}" alt="new Cookie logo" width="72" weight=""72>
-    </div>
 
-    <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
+<#--    <input type="text" id="inputUsername" name="name" class="form-control" placeholder="Username" required>-->
+<#--    <label>Имя</label>-->
+    <@spring.formInput "signUpDto.name" "placeholder='username'"/>
+<#--    <label>Фамилия</label>-->
+<#--    <@spring.formInput "SignUpDto.surname"/>-->
+<#--    <@spring.showErrors "<br>" "error"/>-->
 
 <#--    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>-->
 
-    <input type="text" id="inputUsername" name="name" class="form-control" placeholder="Username" required>
+    <@spring.formInput "signUpDto.email" "placeholder='email'"/>
+    <@spring.showErrors ".error"/>
 
-    <input type="password" id="inputPassword1" name="password" class="form-control" placeholder="Password" required>
+<#--    <input <@spring.formInput "userForm.cabinet"/> class="form-control" placeholder="Cabinet" required>-->
 
-<#--    <input type="password" id="inputPassword2" name="password2" class="form-control" placeholder="Confirm Password" required>-->
+    <@spring.formInput "signUpDto.cabinet" "placeholder='cabinet'"/>
+    <@spring.showErrors  ".error"/>
+
+<#--    <input type="password" id="inputPassword1" name="password" class="form-control" placeholder="Password" required>-->
+    <@spring.formPasswordInput "signUpDto.password" "placeholder='password'"/>
+    <@spring.showErrors ".error"/>
 
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
@@ -100,4 +121,5 @@
     </div>
 
 </form>
+</body>
 </html>

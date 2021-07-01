@@ -33,7 +33,7 @@ public class SignInRestServiceImpl implements SignInRestService{
 
         if(usersTOptional.isPresent()){
             UsersT usersT = usersTOptional.get();
-            if(passwordEncoder.matches(signInDto.getPassword(), usersT.getPassword())){
+            if(passwordEncoder.matches(signInDto.getPassword(), usersT.getHashPassword())){
                 String token = Jwts.builder()
                      .setSubject(usersT.getId().toString())
                      .claim("name", usersT.getName())
@@ -52,7 +52,7 @@ public class SignInRestServiceImpl implements SignInRestService{
 
         if(usersTOptional.isPresent()){
             UsersT usersT = usersTOptional.get();
-            if(usersT.getPassword().equals(signInDto.getPassword())){
+            if(usersT.getHashPassword().equals(signInDto.getPassword())){
                 String token = Jwts.builder()
                         .setSubject(usersT.getId().toString())
                         .claim("name", usersT.getName())
