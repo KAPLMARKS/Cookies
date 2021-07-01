@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class    OrderStaffServiceImpl implements OrderStaffService {
+public class OrderStaffServiceImpl implements OrderStaffService {
 
     @Autowired
     OrderRepository orderRepository;
