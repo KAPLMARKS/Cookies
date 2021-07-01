@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface OrderProductsService {
     List<OrderProductsT>  orderProductsByOrderIdAndProductId(Long productId, OrderT orderID, int count) throws Exception;
-    void updateCountByOrderId(Long orderID, int count) throws Exception;
+    void updateCountByOrderId(int count, Long orderID) throws Exception;
 }

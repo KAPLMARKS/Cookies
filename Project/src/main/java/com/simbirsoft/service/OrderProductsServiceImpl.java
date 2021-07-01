@@ -42,7 +42,7 @@ public class OrderProductsServiceImpl implements OrderProductsService {
     }
 
     @Override
-    public void updateCountByOrderId(Long orderID, int count){
-        orderProductsRepository.updateCountByOrderId(orderID, count);
+    public void updateCountByOrderId(int count, Long orderID) throws Exception{
+        orderProductsRepository.updateCountByOrderId(count, orderID);
     }
 }
