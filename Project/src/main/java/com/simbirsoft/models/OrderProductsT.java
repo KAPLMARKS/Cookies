@@ -18,13 +18,13 @@ public class OrderProductsT {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    //изменил тип и убрал аннотацию ManyToOne
     @JoinColumn(name = "order_id")
-    private OrderT orderID;
+    private Long orderID;
 
-    @ManyToOne
+    //изменил тип и убрал аннотацию ManyToOne
     @JoinColumn(name = "product_id")
-    private Product productID;
+    private Long productID;
 
     private int count;
 
