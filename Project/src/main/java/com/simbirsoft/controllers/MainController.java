@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -100,6 +101,18 @@ public class MainController {
 
         }
         return "account_page";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("order/in")
+    public String orderIn(
+            @RequestParam("order") Long orderId,
+            Model model
+    ){
+        OrderT orderT = orderService.getOrdersByOrderID(orderId);
+        model.addAttribute("orderInfo", orderService.getOrdersByOrderID(orderId));
+        model.addAttribute("orders", orderT.getProductList());
+        return "orderIn_page";
     }
 
 }

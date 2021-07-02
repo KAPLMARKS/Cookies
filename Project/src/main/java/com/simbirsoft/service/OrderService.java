@@ -11,4 +11,6 @@ public interface OrderService {
     void setProductsToOrder(UsersT user, Long orderId);
 
     List<OrderT> getOrdersByUserId(UsersT user);
+
+    OrderT getOrdersByOrderID(Long id);
 }

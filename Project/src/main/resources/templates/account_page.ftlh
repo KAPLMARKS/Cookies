@@ -83,7 +83,11 @@
                 <#if orders??>
                 <ul class="list-group">
                     <#list orders as order>
-                    <p style="text-decoration: none;"><li class="list-group-item">Заказ №=${order.orderID}, Статус ${order.status}</li></p>
+<#--                    <a href="order/in" name="order" value="${order.getOrderID()}" style="text-decoration: none;"><li class="list-group-item">Заказ №=${order.orderID}, Статус ${order.status}</li></a>-->
+                        <form action="/order/in" method="post" >
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                            <button type="submit" name="order" value="${order.getOrderID()}" style="text-decoration: none;><li class="list-group-item">Заказ №=${order.orderID}, Статус ${order.status}</li></button>
+                        </form>
                     </#list>
                 </ul>
                 <#else>

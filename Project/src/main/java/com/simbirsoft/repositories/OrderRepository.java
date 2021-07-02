@@ -27,4 +27,6 @@ public interface OrderRepository extends JpaRepository<OrderT, Long> {
 
     List<OrderT> getAllByUsersT(UsersT user);
 
+    OrderT getOrderTByOrderID(Long id);
+
 }
