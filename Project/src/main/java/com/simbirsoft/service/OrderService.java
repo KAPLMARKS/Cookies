@@ -14,4 +14,5 @@ public interface OrderService {
 
     OrderT getOrdersByOrderID(Long id);
     List<OrderT> getAllOrder();
+    List<OrderT> getAllByStatus(Enum status);
 }

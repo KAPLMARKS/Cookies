@@ -50,4 +50,9 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderT> getAllOrder() {
         return orderRepository.findAll();
     }
+
+    @Override
+    public List<OrderT> getAllByStatus(Enum status) {
+        return orderRepository.getAllByStatus(status);
+    }
 }

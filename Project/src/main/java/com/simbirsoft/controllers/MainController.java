@@ -95,7 +95,7 @@ public class MainController {
         model.addAttribute("user", userSession.getUser());
 
         if (userSession.getRole().equals("ADMIN")) {
-            model.addAttribute("orders", orderService.getAllOrder());
+            model.addAttribute("orders", orderService.getAllByStatus(OrderT.Status.WAITING));
         } else{
             model.addAttribute("role", "USER");
         if (orderService.getOrdersByUserId(userSession.getUser()).isEmpty())
