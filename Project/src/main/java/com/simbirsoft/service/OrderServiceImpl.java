@@ -45,4 +45,9 @@ public class OrderServiceImpl implements OrderService {
     public OrderT getOrdersByOrderID(Long id) {
         return orderRepository.getOrderTByOrderID(id);
     }
+
+    @Override
+    public List<OrderT> getAllOrder() {
+        return orderRepository.findAll();
+    }
 }

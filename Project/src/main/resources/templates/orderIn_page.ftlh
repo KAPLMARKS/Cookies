@@ -33,6 +33,9 @@
             padding: 15px;
             margin: auto;
         }
+        .lead{
+            font-size: 17px;
+        }
     </style>
 
     <!-- End Header -->
@@ -40,9 +43,28 @@
 <div class="main">
     <div class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Заказ №=${orderInfo.getOrderID()}</h1>
-<#list orders as order>
-    ${order.getProductName()}
-</#list>
+
+        <table>
+            <tr>
+                <th>Заказанные Продукты</th>
+            </tr>
+            <#list orders as order>
+                <tr>
+                    <p class="lead"><td>${order.getProductName()}</td></p>
+                </tr>
+            </#list>
+        </table>
+        <#if role??>
+            <p class="lead"><td>Кабинет = ${orderInfo.cabinet}</td></p>
+            <form action="/order/decline" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <p class="m-auto"><button class="btn btn-primary" name="orderId" value="${orderInfo.getOrderID()}">Отказать</button></p>
+            </form>
+            <form action="/order/delivered" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <p class="m-auto"><button class="btn btn-primary" name="orderId" value="${orderInfo.getOrderID()}">Доставлено</button></p>
+            </form>
+        </#if>
     </div>
 </div>
 </body>

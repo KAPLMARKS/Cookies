@@ -69,13 +69,14 @@
 
 <body>
 <div class="main">
+    <#if role??>
     <div class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Profile</h1>
         <p class="form-control">${user.name}</p>
         <p class="form-control">${user.email}</p>
         <p class="form-control">${user.cabinet}</p>
     </div>
-
+    </#if>
     <div class="container mt-4 p-4">
         <div class="row">
             <div class="blog-posts">
@@ -91,7 +92,7 @@
                     </#list>
                 </ul>
                 <#else>
-                <p>You don't have any orders</p>
+                <p>Don't have any orders</p>
                 </#if>
             </div>
         </div>

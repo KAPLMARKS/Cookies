@@ -58,4 +58,9 @@ public class UsersT implements Serializable {
                 .role(userDto.getRole())
                 .build();
     }
+
+
+    public String getRole() {
+        return role.toString();
+    }
 }

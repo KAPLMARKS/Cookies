@@ -13,4 +13,5 @@ public interface OrderService {
     List<OrderT> getOrdersByUserId(UsersT user);
 
     OrderT getOrdersByOrderID(Long id);
+    List<OrderT> getAllOrder();
 }

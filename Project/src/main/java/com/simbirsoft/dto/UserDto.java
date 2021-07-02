@@ -20,11 +20,5 @@ public class UserDto {
 
     private UsersT.Role role;
 
-    public static UserDto castToDto(UsersT usersT){
-        return UserDto.builder()
-                .id(usersT.getId())
-                .name(usersT.getName())
-                .role(usersT.getRole())
-                .build();
-    }
+
 }

@@ -94,12 +94,15 @@ public class MainController {
     public String getAccount(@AuthenticationPrincipal UserDetailsImpl userSession, Model model){
         model.addAttribute("user", userSession.getUser());
 
+        if (userSession.getRole().equals("ADMIN")) {
+            model.addAttribute("orders", orderService.getAllOrder());
+        } else{
+            model.addAttribute("role", "USER");
         if (orderService.getOrdersByUserId(userSession.getUser()).isEmpty())
             model.addAttribute("orders", null);
         else {
             model.addAttribute("orders", orderService.getOrdersByUserId(userSession.getUser()));
-
-        }
+        }}
         return "account_page";
     }
 
@@ -107,12 +110,37 @@ public class MainController {
     @PostMapping("order/in")
     public String orderIn(
             @RequestParam("order") Long orderId,
+            @AuthenticationPrincipal UserDetailsImpl userSession,
             Model model
     ){
+        if (userSession.getRole().equals("ADMIN"))
+            model.addAttribute("role", "ADMIN");
+
+
         OrderT orderT = orderService.getOrdersByOrderID(orderId);
         model.addAttribute("orderInfo", orderService.getOrdersByOrderID(orderId));
         model.addAttribute("orders", orderT.getProductList());
         return "orderIn_page";
     }
 
+    @PostMapping("order/decline")
+    public String orderDecline(
+        @RequestParam("orderId") Long orderId
+    ){
+        OrderT orderT = orderService.getOrdersByOrderID(orderId);
+        orderT.setStatus(OrderT.Status.DECLINED);
+        orderService.save(orderT);
+        return "redirect:/account";
+    }
+
+    @PostMapping("order/delivered")
+    public String orderDelivered(
+            @RequestParam("orderId") Long orderId
+    ){
+        OrderT orderT = orderService.getOrdersByOrderID(orderId);
+        orderT.setStatus(OrderT.Status.DELIVERED);
+        orderService.save(orderT);
+        return "redirect:/account";
+    }
 }
+
