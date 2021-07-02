@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -30,6 +31,9 @@ public class MainController {
 
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private OrderService orderService;
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/main")
@@ -62,8 +66,7 @@ public class MainController {
         return "redirect:/main";
     }
 
-    @Autowired
-    private OrderService orderService;
+
 
 
     @PostMapping("order")
@@ -85,4 +88,18 @@ public class MainController {
 
         return "redirect:/main";
     }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/account")
+    public String getAccount(@AuthenticationPrincipal UserDetailsImpl userSession, Model model){
+        model.addAttribute("user", userSession.getUser());
+
+        if (orderService.getOrdersByUserId(userSession.getUser()).isEmpty())
+            model.addAttribute("orders", null);
+        else {
+            model.addAttribute("orders", orderService.getOrdersByUserId(userSession.getUser()));
+
+        }
+        return "account_page";
+    }
+
 }

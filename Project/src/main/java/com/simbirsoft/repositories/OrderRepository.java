@@ -1,6 +1,7 @@
 package com.simbirsoft.repositories;
 
 import com.simbirsoft.models.OrderT;
+import com.simbirsoft.models.UsersT;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,5 +24,7 @@ public interface OrderRepository extends JpaRepository<OrderT, Long> {
 
     @Query("UPDATE OrderT o SET o.status ='DELIVERED' where o.orderID=:id")
     void setOrderDeliveredStatus(@Param("id") Long id);
+
+    List<OrderT> getAllByUsersT(UsersT user);
 
 }
