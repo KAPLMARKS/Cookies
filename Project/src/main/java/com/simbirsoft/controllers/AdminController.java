@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -29,6 +30,21 @@ public class AdminController {
         modelAndView.addObject("orders", orders);
         return modelAndView;
     }
+
+   @PostMapping("/order/admin/delivered")
+   @PreAuthorize("hasAuthority('ADMIN')")
+   public ModelAndView orderDelivered() {
+       orderStaffServiceImpl.deliveredOrder();
+       return new ModelAndView("redirect:/order/admin");
+   }
+
+    @PostMapping("/order/admin/declined")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ModelAndView orderDelivered() {
+        orderStaffServiceImpl.declinedOrder();
+        return new ModelAndView("redirect:/order/admin");
+    }
+
 
 
 }
